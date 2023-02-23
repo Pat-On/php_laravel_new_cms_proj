@@ -42,8 +42,8 @@
                                   {{$post->title}}
                                 </td>
                                 <td>
-                                  <img height='40px'src="{{$post->image}}" alt="">
-                                 
+                                  {{-- <img height='40px'src="{{asset($post->post_image)}}" alt=""> --}}
+                                  <img  height='40px'src="{{$post->post_image}}" alt="">
                                 </td>
                                 <td>
                                   {{$post->created_at->diffForHumans()}}
