@@ -16,7 +16,6 @@ class PostController extends Controller
 
     public function create()
     {
-
         // you can use it here if you want to
         $this->authorize('create', Post::class);
 
