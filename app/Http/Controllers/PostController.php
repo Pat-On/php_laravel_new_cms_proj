@@ -69,4 +69,46 @@ class PostController extends Controller
 
         return back();
     }
+
+
+    public function edit(Post $post){
+        // $post = Post::findOrFail($post);
+
+
+        return view('admin.posts.edit', ['post' => $post]);
+    }
+
+    public function update(Post $post) {
+        $inputs = request()->validate([
+            'title' => 'required|min:8|max:255',
+            'post_image' => 'file', //'file'
+            'body' => 'required',
+        ]);
+
+        // we do not have to use it
+        // $post = new Post();
+        // $post->title = request('title');
+
+        if (request('post_image')) {
+            //
+            // php artisan storage:link
+            $inputs['post_image'] = request('post_image')->store('images'); // image is going to be stored under the random name
+            $post->post_image = $inputs['post_image'];
+        }
+        $post->title = $inputs['title'];
+        $post->body = $inputs['body'];
+
+        // $post->save();
+        //or
+        // auth()->user()->posts()->save($post);
+
+        // $post->save();
+
+        $post->update($inputs);
+      
+       session()->flash('post_updated','Post was updated');
+
+
+        return redirect()->route('post.index');
+    }
 }

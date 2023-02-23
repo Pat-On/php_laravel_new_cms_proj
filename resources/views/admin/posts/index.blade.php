@@ -11,6 +11,8 @@
                   <div class="alert alert-danger">  {{session('message2')}}</div>
                   @elseif(session('post-created-message'))
                   <div class="alert alert-success">  {{session('post-created-message')}}</div>
+                  @elseif(session('post_updated'))
+                  <div class="alert alert-success">  {{session('post_updated')}}</div>
                   @endif
 
                  <!-- DataTales Example -->
@@ -53,7 +55,7 @@
                                   {{$post->user->name}}
                                 </td>
                                 <td>
-                                  {{$post->title}}
+                                 <a href="{{route('post.edit', $post->id)}}"> {{$post->title}}</a>
                                 </td>
                                 <td>
                                   {{-- <img height='40px'src="{{asset($post->post_image)}}" alt=""> --}}
