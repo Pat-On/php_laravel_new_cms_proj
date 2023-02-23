@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permision_role', function (Blueprint $table) {
+        Schema::create('permission_role', function (Blueprint $table) {
             // $table->id();
             $table->primary(['permission_id', 'role_id']);
             $table->foreignId("permission_id")->constrained()->onDelete('cascade');
@@ -25,6 +25,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permision_role');
+        Schema::dropIfExists('permission_role');
     }
 };
+
+// tinker
+// $admin->permissions()->attach($perm);
+// $perm = App\Models\Permission::find(1);
+// $user->roles()->attach($admin);
+// $admin = App\Models\Role::find(1);
+// $user = App\Models\User::find(1);
