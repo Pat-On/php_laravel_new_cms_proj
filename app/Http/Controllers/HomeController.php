@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Post;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,6 @@ class HomeController extends Controller
     {
         $posts = Post::all();
 
-        return view('home', ['posts'=> $posts]);
+        return view('home', ['posts' => $posts]);
     }
 }
