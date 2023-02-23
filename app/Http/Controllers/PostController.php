@@ -55,7 +55,7 @@ class PostController extends Controller
     {
         // $posts = Post::all();
 
-        $posts = auth()->user()->posts;
+        $posts = auth()->user()->posts()->paginate(5);
 
         // example of policies
         // $posts = Post::all();
