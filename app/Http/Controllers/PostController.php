@@ -16,6 +16,10 @@ class PostController extends Controller
 
     public function create()
     {
+
+        // you can use it here if you want to
+        $this->authorize('create', Post::class);
+
         // admin/posts/create
         return view('admin.posts.create');
     }
@@ -23,6 +27,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // dd(request()->all());
+        $this->authorize('create', Post::class);
 
         $inputs = request()->validate([
             'title' => 'required|min:8|max:255',
@@ -44,19 +49,28 @@ class PostController extends Controller
         // 3rd way
         session()->flash('post-created-message', 'Post was created');
 
-
         return redirect()->route('post.index');
     }
 
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+
+        $posts = auth()->user()->posts;
+
+        // example of policies
+        // $posts = Post::all();
 
         return view('admin.posts.index', ['posts' => $posts]);
     }
 
     public function destroy(Post $post, Request $request)
     {
+        // if(auth()->user()->id !== $post->user_id) {
+
+        // }
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         // temporary session
@@ -70,15 +84,19 @@ class PostController extends Controller
         return back();
     }
 
-
-    public function edit(Post $post){
+    public function edit(Post $post)
+    {
         // $post = Post::findOrFail($post);
 
+        $this->authorize('view', $post);
 
-        return view('admin.posts.edit', ['post' => $post]);
+        if (auth()->user()->can('view', $post)) {
+            return view('admin.posts.edit', ['post' => $post]);
+        }
     }
 
-    public function update(Post $post) {
+    public function update(Post $post)
+    {
         $inputs = request()->validate([
             'title' => 'required|min:8|max:255',
             'post_image' => 'file', //'file'
@@ -97,17 +115,17 @@ class PostController extends Controller
         }
         $post->title = $inputs['title'];
         $post->body = $inputs['body'];
-
         // $post->save();
         //or
         // auth()->user()->posts()->save($post);
 
+        // authorization based on policy
+        $this->authorize('update', $post);
+
         // $post->save();
+        $post->update();
 
-        $post->update($inputs);
-      
-       session()->flash('post_updated','Post was updated');
-
+        session()->flash('post_updated', 'Post was updated');
 
         return redirect()->route('post.index');
     }
