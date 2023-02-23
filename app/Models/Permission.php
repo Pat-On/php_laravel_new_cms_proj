@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     use HasFactory;
-    protected $quarded =[];
-    public function role(){
+
+    protected $quarded = [];
+
+    public function role()
+    {
         return $this->belongsToMany(Role::class);
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany(User::class);
     }
 }
