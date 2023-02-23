@@ -22,11 +22,13 @@ class Post extends Model
     // }
 
     // mutators
-    public function getPostImageAttribute($value) {
+    public function getPostImageAttribute($value)
+    {
         // return asset($value);
-        if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
+        if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false) {
             return $value;
         }
-        return asset('storage/' . $value);
-    } 
+
+        return asset('storage/'.$value);
+    }
 }

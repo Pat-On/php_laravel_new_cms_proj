@@ -1,6 +1,18 @@
 <x-admin-master>
 
     @section('content')
+                  <h1>All Posts</h1>
+                  @if(Session::has('message'))
+                  <div class="alert alert-danger">  {{Session::get('message')}}</div>
+                  @endif
+
+                  @if(Session::has('message2'))
+                  <div class="alert alert-danger">  {{Session::get('message2')}}</div>
+                  <div class="alert alert-danger">  {{session('message2')}}</div>
+                  @elseif(session('post-created-message'))
+                  <div class="alert alert-success">  {{session('post-created-message')}}</div>
+                  @endif
+
                  <!-- DataTales Example -->
                  <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -17,6 +29,7 @@
                               <th>Image</th>
                               <th>Created at</th>
                               <th>Updated</th>
+                              <th>Delete</th>
                             </tr>
                           </thead>
                           <tfoot>
@@ -27,6 +40,7 @@
                               <th>Image</th>
                               <th>Created at</th>
                               <th>Updated</th>
+                              <th>Delete</th>
                             </tr>
                           </tfoot>
                           <tbody>
@@ -50,6 +64,16 @@
                                 </td>
                                 <td>
                                   {{$post->updated_at->diffForHumans()}}
+                                </td>
+                                <td>
+                                  <form action="{{route('post.destroy', $post->id)}}" method='post'>
+                                    @csrf
+                                    @method('DELETE')
+
+
+
+                                    <button type='submit' class="btn btn-danger">Delete</button>
+                                  </form>
                                 </td>
                               </tr>
                             @endforeach

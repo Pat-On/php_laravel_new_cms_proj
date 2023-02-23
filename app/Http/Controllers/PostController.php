@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -40,7 +41,11 @@ class PostController extends Controller
 
         $user = auth()->user()->posts()->create($inputs);
 
-        return back();
+        // 3rd way
+        session()->flash('post-created-message', 'Post was created');
+
+
+        return redirect()->route('post.index');
     }
 
     public function index()
@@ -48,5 +53,20 @@ class PostController extends Controller
         $posts = Post::all();
 
         return view('admin.posts.index', ['posts' => $posts]);
+    }
+
+    public function destroy(Post $post, Request $request)
+    {
+        $post->delete();
+
+        // temporary session
+
+        // 1 way
+        Session::flash('message', 'Post was Deleted');
+
+        // 2 way
+        $request->session()->flash('message2', 'Post was Deleted Message 2');
+
+        return back();
     }
 }
