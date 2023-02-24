@@ -1,7 +1,11 @@
 <x-admin-master>
     @section('content')
         <h1>USERS</h1>
+        @if(session('user-deleted'))
+        <div class="alert alert-danger">                {{session('user-deleted')}}</div>
 
+
+        @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
@@ -17,6 +21,7 @@
                                 <th>Name</th>
                                 <th>Registered On</th>
                                 <th>Updated On</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
 
@@ -32,6 +37,15 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->created_at->diffForHumans()}}</td>
                                         <td>{{$user->updated_at->diffForHumans()}}</td>
+                                        <td>
+                                            <form action="{{route('user.destroy', $user)}}" method="POST">
+                                                @csrf
+                                                @method("DELETE")
+
+                                                <button class="btn btn-danger">Delete</button>
+                                            
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
 
@@ -48,6 +62,7 @@
                                 <th>Name</th>
                                 <th>Registered On</th>
                                 <th>Updated On</th>
+                                <th>Delete</th>
                             </tr>
                         </tfoot>
 
