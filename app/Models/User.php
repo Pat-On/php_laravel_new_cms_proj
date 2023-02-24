@@ -18,7 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
+        'avatar',
         'email',
         'password',
     ];
@@ -41,6 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 
     public function posts()
     {
@@ -67,5 +74,16 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+
+    public function getAvatarAttribute($value)
+    {
+        // return asset($value);
+        if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false) {
+            return $value;
+        }
+
+        return asset('storage/'.$value);
     }
 }
