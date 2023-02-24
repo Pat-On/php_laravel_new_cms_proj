@@ -76,7 +76,6 @@ class User extends Authenticatable
         return false;
     }
 
-
     public function getAvatarAttribute($value)
     {
         // return asset($value);
