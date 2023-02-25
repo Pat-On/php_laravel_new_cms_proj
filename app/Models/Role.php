@@ -12,6 +12,12 @@ class Role extends Model
 
     protected $quarded = [];
 
+    protected $fillable = [
+        'slug',
+        'name',
+
+    ];
+
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);

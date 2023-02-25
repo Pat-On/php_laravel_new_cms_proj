@@ -71,6 +71,9 @@
                 <x-admin-sidebar-users-links></x-admin-sidebar-users-links>
             @endif
 
+
+            <x-authorization-links></x-authorization-links>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"

@@ -52,3 +52,13 @@ Route::middleware(['role:Admin'])->group(function () {
 Route::middleware(['can:view,user'])->group(function () {
     Route::get('admin/users/{user}/profile', [App\Http\Controllers\UserController::class, 'show'])->name('user.profile.show');
 });
+
+// authorization permissions
+
+//roles
+Route::get('/admin/roles',  [App\Http\Controllers\RoleController::class, 'index'])->name('role.index');
+Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
+
+
+//permissions
+Route::get('/admin/permissions',  [App\Http\Controllers\permissionsController::class, 'index'])->name('permission.index');
