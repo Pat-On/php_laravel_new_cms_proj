@@ -59,6 +59,8 @@ Route::middleware(['can:view,user'])->group(function () {
 Route::get('/admin/roles',  [App\Http\Controllers\RoleController::class, 'index'])->name('role.index');
 Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
 Route::delete('/admin/roles/{role}/destroy', [App\Http\Controllers\RoleController::class, 'destroy'])->name('role.destroy');
+Route::get('/admin/roles/{role}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit');
+Route::put('/admin/roles/{role}/update', [App\Http\Controllers\RoleController::class, 'update'])->name('role.update');
 
 
 //permissions
