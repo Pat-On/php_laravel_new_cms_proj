@@ -33,4 +33,12 @@ class RoleController extends Controller
         return back();
         
     }
+
+    public function destroy(Role $role){
+
+        // dd($role);
+        $role->delete();
+
+        return back();
+    }
 }

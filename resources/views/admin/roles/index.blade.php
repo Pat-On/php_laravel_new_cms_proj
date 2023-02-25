@@ -30,6 +30,7 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +39,13 @@
                                     <td>{{ $role->id }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->slug }}</td>
+                                    <td>
+                                        <form method="POST" action="{{route('role.destroy', $role)}}">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button type="submit" class="btn btn-danger">DELETE</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -46,6 +54,7 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Delete</th>
                             </tr>
                         </tfoot>
 

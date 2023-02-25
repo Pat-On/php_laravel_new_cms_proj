@@ -58,6 +58,7 @@ Route::middleware(['can:view,user'])->group(function () {
 //roles
 Route::get('/admin/roles',  [App\Http\Controllers\RoleController::class, 'index'])->name('role.index');
 Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
+Route::delete('/admin/roles/{role}/destroy', [App\Http\Controllers\RoleController::class, 'destroy'])->name('role.destroy');
 
 
 //permissions
