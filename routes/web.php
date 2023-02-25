@@ -33,23 +33,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/posts/{post}/destroy', [App\Http\Controllers\PostController::class, 'destroy'])->name('post.destroy');
     Route::patch('/admin/posts/{post}/update', [App\Http\Controllers\PostController::class, 'update'])->name('post.update');
 
-
     Route::put('admin/users/{user}/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.profile.update');
 
-  
     Route::delete('admin/users/{user}/destroy', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
-
 });
 
 // policy
 Route::get('/admin/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->middleware('can:view,post')->name('post.edit');
 
-
-Route::middleware(['role:Admin'])->group(function(){
+Route::middleware(['role:Admin'])->group(function () {
     Route::get('admin/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+
+    Route::put('/users/{user}/attach', [App\Http\Controllers\UserController::class, 'attach'])->name('user.role.attach');
+
+    Route::put('/users/{user}/detach', [App\Http\Controllers\UserController::class, 'detach'])->name('user.role.detach');
 });
 
-Route::middleware(['can:view,user'])->group(function(){
+Route::middleware(['can:view,user'])->group(function () {
     Route::get('admin/users/{user}/profile', [App\Http\Controllers\UserController::class, 'show'])->name('user.profile.show');
-
 });

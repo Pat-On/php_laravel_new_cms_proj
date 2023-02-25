@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 
 class UserController extends Controller
@@ -11,11 +12,14 @@ class UserController extends Controller
     // binding
     public function show(User $user)
     {
-        return view('admin.users.profile', ['user' => $user]);
+        return view('admin.users.profile', [
+            'user' => $user,
+            'roles' => Role::all(),
+        ]);
     }
 
-
-    public function index(){
+    public function index()
+    {
         $users = User::all();
 
         return view('admin.users.index', ['users' => $users]);
@@ -42,11 +46,25 @@ class UserController extends Controller
         // }
     }
 
-
-    public function destroy(User $user){
+    public function destroy(User $user)
+    {
         $user->delete();
 
-        session()->flash("user-deleted", "User has been deleted");
+        session()->flash('user-deleted', 'User has been deleted');
+
+        return back();
+    }
+
+    public function attach(User $user)
+    {
+        $user->roles()->attach(request('role'));
+
+        return back();
+    }
+
+    public function detach(User $user)
+    {
+        $user->roles()->detach(request('role'));
 
         return back();
     }

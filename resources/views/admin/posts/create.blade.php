@@ -4,7 +4,7 @@
         <h1>Create</h1>
 
 
-        <form action="{{route('post.store')}}" method='post' enctype='multipart/form-data'>
+        <form action="{{ route('post.store') }}" method='post' enctype='multipart/form-data'>
 
             @csrf
 
@@ -15,13 +15,13 @@
 
             <div class="form-group">
                 <label for="file">File</label>
-                <input type="file" name='post_image' class="form-control-file" id='post_image' >
+                <input type="file" name='post_image' class="form-control-file" id='post_image'>
             </div>
 
             <div class="form-group">
-            <textarea  class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
-        </div>
-        <button class="btn btn-primary">Submit</button>
+                <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
+            </div>
+            <button class="btn btn-primary">Submit</button>
         </form>
     @endsection
 
