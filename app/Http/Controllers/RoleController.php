@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Support\Str;
 
@@ -9,15 +10,16 @@ class RoleController extends Controller
 {
     //
 
-    public function index(){
+    public function index()
+    {
         return view('admin.roles.index', [
-                   'roles' => Role::all(),
+            'roles' => Role::all(),
+
         ]);
+    }
 
- 
-    } 
-
-    public function store(){
+    public function store()
+    {
 
 
         request()->validate([
@@ -31,10 +33,10 @@ class RoleController extends Controller
         ]);
 
         return back();
-        
     }
 
-    public function destroy(Role $role){
+    public function destroy(Role $role)
+    {
 
         // dd($role);
         $role->delete();
@@ -42,11 +44,16 @@ class RoleController extends Controller
         return back();
     }
 
-    public function edit(Role $role) {
-        return view('admin.roles.edit', ['role' => $role]);
+    public function edit(Role $role)
+    {
+        return view('admin.roles.edit', [
+            'role' => $role,
+            'permissions' => Permission::all()
+        ]);
     }
 
-    public function update(Role $role) {
+    public function update(Role $role)
+    {
         $role->name = Str::ucfirst(request('name'));
 
         $role->slug = Str::of(request('slug'))->slug('_');
@@ -55,7 +62,5 @@ class RoleController extends Controller
         $role->save();
 
         return back();
-        
-        
     }
 }
