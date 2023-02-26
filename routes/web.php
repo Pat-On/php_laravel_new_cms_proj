@@ -61,7 +61,8 @@ Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'store'
 Route::delete('/admin/roles/{role}/destroy', [App\Http\Controllers\RoleController::class, 'destroy'])->name('role.destroy');
 Route::get('/admin/roles/{role}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit');
 Route::put('/admin/roles/{role}/update', [App\Http\Controllers\RoleController::class, 'update'])->name('role.update');
-
+Route::put('/admin/roles/{role}/attach', [App\Http\Controllers\RoleController::class, 'attach_permission'])->name('role.permission.attach');
+Route::put('/admin/roles/{role}/detach', [App\Http\Controllers\RoleController::class, 'detach_permission'])->name('role.permission.detach');
 
 //permissions
 Route::get('/admin/permissions',  [App\Http\Controllers\permissionsController::class, 'index'])->name('permission.index');
