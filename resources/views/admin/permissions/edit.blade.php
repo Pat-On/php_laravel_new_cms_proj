@@ -1,18 +1,18 @@
 <x-admin-master>
     @section('content')
-        <h1>Edit role: {{ $role->name }}</h1>
+        <h1>Edit role: {{ $permission->name }}</h1>
 
 
         <div class="row">
             <div class="col-sm-6">
-                <form method="POST" action="{{ route('role.update', $role) }}">
+                <form method="POST" action="{{ route('permission.update', $permission) }}">
                     @csrf
                     @method('put')
 
                     <div class="form-group">
 
                         <label for="name"></label>
-                        <input type="text" value="{{ $role->name }}" name="name" id="name">
+                        <input type="text" value="{{ $permission->name }}" name="name" id="namne">
 
 
                     </div>
@@ -20,7 +20,7 @@
                 </form>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-12">
                 @if ($permissions->isNotEmpty())
                     <div class="table-responsive">
@@ -110,6 +110,6 @@
                 @endif
             </div>
 
-        </div>
+        </div> --}}
     @endsection
 </x-admin-master>

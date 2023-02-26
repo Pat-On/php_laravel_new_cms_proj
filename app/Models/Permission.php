@@ -11,6 +11,12 @@ class Permission extends Model
 
     protected $quarded = [];
 
+    protected $fillable = [
+        'slug',
+        'name',
+
+    ];
+
     public function role()
     {
         return $this->belongsToMany(Role::class);

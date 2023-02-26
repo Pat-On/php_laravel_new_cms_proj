@@ -20,12 +20,9 @@ class RoleController extends Controller
 
     public function store()
     {
-
-
         request()->validate([
-            'name' => ['required']
+            'name' => ['required'],
         ]);
-
 
         Role::create([
             'name' => Str::ucfirst(request('name')),
@@ -37,7 +34,6 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-
         // dd($role);
         $role->delete();
 
@@ -48,7 +44,7 @@ class RoleController extends Controller
     {
         return view('admin.roles.edit', [
             'role' => $role,
-            'permissions' => Permission::all()
+            'permissions' => Permission::all(),
         ]);
     }
 
@@ -58,18 +54,20 @@ class RoleController extends Controller
 
         $role->slug = Str::of(request('slug'))->slug('_');
 
-
         $role->save();
 
         return back();
     }
 
-    public function attach_permission(Role $role) {
+    public function attach_permission(Role $role)
+    {
         $role->permissions()->attach(request('permission'));
 
         return back();
     }
-    public function detach_permission(Role $role) {
+
+    public function detach_permission(Role $role)
+    {
         $role->permissions()->detach(request('permission'));
 
         return back();

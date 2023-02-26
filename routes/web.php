@@ -56,7 +56,7 @@ Route::middleware(['can:view,user'])->group(function () {
 // authorization permissions
 
 //roles
-Route::get('/admin/roles',  [App\Http\Controllers\RoleController::class, 'index'])->name('role.index');
+Route::get('/admin/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('role.index');
 Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
 Route::delete('/admin/roles/{role}/destroy', [App\Http\Controllers\RoleController::class, 'destroy'])->name('role.destroy');
 Route::get('/admin/roles/{role}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit');
@@ -65,4 +65,8 @@ Route::put('/admin/roles/{role}/attach', [App\Http\Controllers\RoleController::c
 Route::put('/admin/roles/{role}/detach', [App\Http\Controllers\RoleController::class, 'detach_permission'])->name('role.permission.detach');
 
 //permissions
-Route::get('/admin/permissions',  [App\Http\Controllers\permissionsController::class, 'index'])->name('permission.index');
+Route::get('/admin/permissions', [App\Http\Controllers\PermissionController::class, 'index'])->name('permission.index');
+Route::post('/admin/permissions', [App\Http\Controllers\PermissionController::class, 'store'])->name('permission.store');
+Route::delete('/admin/permissions/{permission}/destroy', [App\Http\Controllers\PermissionController::class, 'destroy'])->name('permission.destroy');
+Route::get('/admin/permissions/{permission}/edit', [App\Http\Controllers\PermissionController::class, 'edit'])->name('permission.edit');
+Route::put('/admin/permissions/{permission}/update', [App\Http\Controllers\PermissionController::class, 'update'])->name('permission.update');
